@@ -3,7 +3,7 @@ package ksh.deliverymate.order.service;
 import ksh.deliverymate.order.entity.OrderStatus;
 import ksh.deliverymate.order.repository.OrderRepository;
 import ksh.deliverymate.order.repository.projection.OrderStoreInfo;
-import ksh.deliverymate.order.vo.Coordinate;
+import ksh.deliverymate.order.vo.Positoion;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -18,7 +18,7 @@ public class OrderService {
 
     @Transactional(readOnly = true)
     public Slice<OrderStoreInfo> findNearbyOrderIdsWaitingForRiderAssignment(
-        Coordinate center,
+        Positoion center,
         int radius,
         Pageable pageable
     ) {

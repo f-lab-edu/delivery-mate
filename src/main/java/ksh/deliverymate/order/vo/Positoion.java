@@ -7,13 +7,13 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Coordinate {
+public class Positoion {
 
     private double latitude;
     private double longitude;
 
-    public static Coordinate of(double latitude, double longitude) {
-        return Coordinate.builder()
+    public static Positoion of(double latitude, double longitude) {
+        return Positoion.builder()
             .latitude(latitude)
             .longitude(longitude)
             .build();

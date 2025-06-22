@@ -1,12 +1,11 @@
 package ksh.deliverymate.order.facade;
 
 import ksh.deliverymate.order.dto.response.WaitingForRiderOrderDto;
-import ksh.deliverymate.order.repository.OrderItemRepository;
 import ksh.deliverymate.order.repository.projection.OrderItemDetail;
 import ksh.deliverymate.order.repository.projection.OrderStoreInfo;
 import ksh.deliverymate.order.service.OrderItemService;
 import ksh.deliverymate.order.service.OrderService;
-import ksh.deliverymate.order.vo.Coordinate;
+import ksh.deliverymate.order.vo.Positoion;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -22,7 +21,7 @@ public class OrderFacade {
     private final OrderItemService orderItemService;
 
     public WaitingForRiderOrderDto findOrderInfosWaitingForRider(
-        Coordinate center,
+        Positoion center,
         int radius,
         Pageable pageable
     ) {

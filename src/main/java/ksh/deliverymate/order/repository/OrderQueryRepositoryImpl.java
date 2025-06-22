@@ -1,7 +1,5 @@
 package ksh.deliverymate.order.repository;
 
-import com.querydsl.core.Tuple;
-import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanTemplate;
 import com.querydsl.core.types.dsl.Expressions;
@@ -9,7 +7,7 @@ import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import ksh.deliverymate.order.entity.OrderStatus;
 import ksh.deliverymate.order.repository.projection.OrderStoreInfo;
-import ksh.deliverymate.order.vo.Coordinate;
+import ksh.deliverymate.order.vo.Positoion;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -28,7 +26,7 @@ public class OrderQueryRepositoryImpl implements OrderQueryRepository {
     @Override
     public Slice<OrderStoreInfo> findByStatusAndWithinRadius(
         OrderStatus status,
-        Coordinate center,
+        Positoion center,
         int radius,
         Pageable pageable
     ) {
@@ -65,7 +63,7 @@ public class OrderQueryRepositoryImpl implements OrderQueryRepository {
         return createSlice(result, pageable);
     }
 
-    private static String convertIntoWkt(Coordinate center) {
+    private static String convertIntoWkt(Positoion center) {
         return String.format(
             "POINT (%f %f)",
             center.getLatitude(),
