@@ -22,7 +22,7 @@ public class OrderService {
         int radius,
         Pageable pageable
     ) {
-        return orderRepository.findIdByStatusAndWithinRadius(
+        return orderRepository.findByStatusAndWithinRadius(
             OrderStatus.ACCEPTED,
             center,
             radius,

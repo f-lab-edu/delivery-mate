@@ -26,7 +26,7 @@ public class OrderQueryRepositoryImpl implements OrderQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public Slice<OrderStoreInfo> findIdByStatusAndWithinRadius(
+    public Slice<OrderStoreInfo> findByStatusAndWithinRadius(
         OrderStatus status,
         Coordinate center,
         int radius,

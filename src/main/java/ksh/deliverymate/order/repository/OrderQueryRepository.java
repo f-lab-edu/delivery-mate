@@ -8,5 +8,5 @@ import org.springframework.data.domain.Slice;
 
 public interface OrderQueryRepository {
 
-    Slice<OrderStoreInfo> findIdByStatusAndWithinRadius(OrderStatus status, Coordinate center, int radius, Pageable pageable);
+    Slice<OrderStoreInfo> findByStatusAndWithinRadius(OrderStatus status, Coordinate center, int radius, Pageable pageable);
 }
