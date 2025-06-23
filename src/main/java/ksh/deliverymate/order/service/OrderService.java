@@ -17,7 +17,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     @Transactional(readOnly = true)
-    public Slice<OrderStoreInfo> findNearbyOrderIdsWaitingForRiderAssignment(
+    public Slice<OrderStoreInfo> findNearbyOrderWaitingForRider(
         Position center,
         int radius,
         Pageable pageable
