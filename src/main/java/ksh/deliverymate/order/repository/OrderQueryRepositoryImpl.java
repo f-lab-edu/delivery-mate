@@ -6,7 +6,7 @@ import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import ksh.deliverymate.order.entity.OrderStatus;
-import ksh.deliverymate.order.repository.projection.OrderStoreInfo;
+import ksh.deliverymate.order.repository.projection.OrderWithStore;
 import ksh.deliverymate.order.vo.Position;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +24,7 @@ public class OrderQueryRepositoryImpl implements OrderQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public Slice<OrderStoreInfo> findByStatusAndWithinRadius(
+    public Slice<OrderWithStore> findByStatusAndWithinRadius(
         OrderStatus status,
         Position center,
         int radius,
@@ -36,9 +36,9 @@ public class OrderQueryRepositoryImpl implements OrderQueryRepository {
 
         NumberExpression distanceFromStore = distanceFromStore(centerWkt);
 
-        List<OrderStoreInfo> result = queryFactory
+        List<OrderWithStore> result = queryFactory
             .select(Projections.constructor(
-                OrderStoreInfo.class,
+                OrderWithStore.class,
                 order.id,
                 store.name,
                 store.address,

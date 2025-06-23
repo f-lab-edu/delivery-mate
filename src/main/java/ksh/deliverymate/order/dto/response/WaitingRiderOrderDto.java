@@ -1,7 +1,7 @@
 package ksh.deliverymate.order.dto.response;
 
 import ksh.deliverymate.order.repository.projection.OrderItemDetail;
-import ksh.deliverymate.order.repository.projection.OrderStoreInfo;
+import ksh.deliverymate.order.repository.projection.OrderWithStore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,12 +11,12 @@ import java.util.List;
 @AllArgsConstructor
 public class WaitingRiderOrderDto {
 
-    private OrderStoreInfo orderStoreInfo;
+    private OrderWithStore orderStoreInfo;
     private List<OrderItemDetail> orderItemDetails;
 
 
     public static WaitingRiderOrderDto of(
-        OrderStoreInfo orderStoreInfos,
+        OrderWithStore orderStoreInfos,
         List<OrderItemDetail> orderItemDetails
     ) {
         return new WaitingRiderOrderDto(orderStoreInfos, orderItemDetails);

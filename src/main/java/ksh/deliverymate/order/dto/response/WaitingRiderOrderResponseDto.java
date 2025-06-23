@@ -1,6 +1,6 @@
 package ksh.deliverymate.order.dto.response;
 
-import ksh.deliverymate.order.repository.projection.OrderStoreInfo;
+import ksh.deliverymate.order.repository.projection.OrderWithStore;
 import ksh.deliverymate.store.vo.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +22,7 @@ public class WaitingRiderOrderResponseDto {
     public static WaitingRiderOrderResponseDto from(
         WaitingRiderOrderDto orderDto
     ) {
-        OrderStoreInfo orderStoreInfo = orderDto.getOrderStoreInfo();
+        OrderWithStore orderStoreInfo = orderDto.getOrderStoreInfo();
 
         List<OrderItemDetailResponseDto> orderItems = orderDto.getOrderItemDetails()
             .stream()

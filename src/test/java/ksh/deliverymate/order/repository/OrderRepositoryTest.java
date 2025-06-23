@@ -2,7 +2,7 @@ package ksh.deliverymate.order.repository;
 
 import ksh.deliverymate.order.entity.Order;
 import ksh.deliverymate.order.entity.OrderStatus;
-import ksh.deliverymate.order.repository.projection.OrderStoreInfo;
+import ksh.deliverymate.order.repository.projection.OrderWithStore;
 import ksh.deliverymate.order.vo.Position;
 import ksh.deliverymate.store.entity.FoodCategory;
 import ksh.deliverymate.store.entity.Store;
@@ -85,7 +85,7 @@ class OrderRepositoryTest {
         Pageable pageable = PageRequest.of(0, 2);
 
         //when
-        Slice<OrderStoreInfo> orderStoreInfos = orderRepository.findByStatusAndWithinRadius(
+        Slice<OrderWithStore> orderStoreInfos = orderRepository.findByStatusAndWithinRadius(
             OrderStatus.ACCEPTED,
             riderCoordinate,
             radius,

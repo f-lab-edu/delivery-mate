@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class OrderStoreInfo {
+public class OrderWithStore {
 
     private long orderId;
     private String name;

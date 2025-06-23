@@ -4,7 +4,7 @@ import ksh.deliverymate.global.dto.request.PageRequestDto;
 import ksh.deliverymate.order.dto.request.WaitingRiderOrderRequestDto;
 import ksh.deliverymate.order.dto.response.WaitingRiderOrderDto;
 import ksh.deliverymate.order.repository.projection.OrderItemDetail;
-import ksh.deliverymate.order.repository.projection.OrderStoreInfo;
+import ksh.deliverymate.order.repository.projection.OrderWithStore;
 import ksh.deliverymate.order.service.OrderItemService;
 import ksh.deliverymate.order.service.OrderService;
 import ksh.deliverymate.order.vo.Position;
@@ -32,7 +32,7 @@ public class OrderFacade {
         int radius = request.getRadius();
         Pageable pageable = pageRequest.getPageable();
 
-        Slice<OrderStoreInfo> waitingOrders = orderService
+        Slice<OrderWithStore> waitingOrders = orderService
             .findNearbyOrderWaitingForRider(center, radius, pageable);
 
         List<Long> orderIds = extractOrderIdsFrom(waitingOrders);
@@ -50,9 +50,9 @@ public class OrderFacade {
         );
     }
 
-    private static List<Long> extractOrderIdsFrom(Slice<OrderStoreInfo> orderStoreInfos) {
+    private static List<Long> extractOrderIdsFrom(Slice<OrderWithStore> orderStoreInfos) {
         return orderStoreInfos.stream()
-            .map(OrderStoreInfo::getOrderId)
+            .map(OrderWithStore::getOrderId)
             .toList();
     }
 
