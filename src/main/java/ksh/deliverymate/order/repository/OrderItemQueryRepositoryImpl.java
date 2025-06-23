@@ -2,15 +2,13 @@ package ksh.deliverymate.order.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import ksh.deliverymate.menu.entity.QMenu;
-import ksh.deliverymate.order.entity.QOrderItem;
 import ksh.deliverymate.order.repository.projection.OrderItemDetail;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-import static ksh.deliverymate.menu.entity.QMenu.*;
-import static ksh.deliverymate.order.entity.QOrderItem.*;
+import static ksh.deliverymate.menu.entity.QMenu.menu;
+import static ksh.deliverymate.order.entity.QOrderItem.orderItem;
 
 @RequiredArgsConstructor
 public class OrderItemQueryRepositoryImpl implements OrderItemQueryRepository {
@@ -24,6 +22,7 @@ public class OrderItemQueryRepositoryImpl implements OrderItemQueryRepository {
             .select(
                 Projections.constructor(
                     OrderItemDetail.class,
+                    orderItem.orderId,
                     orderItem.quantity,
                     menu.name
                 )

@@ -3,24 +3,22 @@ package ksh.deliverymate.order.dto.response;
 import ksh.deliverymate.order.repository.projection.OrderItemDetail;
 import ksh.deliverymate.order.repository.projection.OrderStoreInfo;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import org.springframework.data.domain.Slice;
 
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class WaitingForRiderOrderDto {
+public class WaitingForRiderOrderServiceResponseDto {
 
-    private Slice<OrderStoreInfo> orderStoreInfos;
+    private OrderStoreInfo orderStoreInfo;
     private List<OrderItemDetail> orderItemDetails;
 
 
-    public static WaitingForRiderOrderDto of(
-        Slice<OrderStoreInfo> orderStoreInfos,
+    public static WaitingForRiderOrderServiceResponseDto of(
+        OrderStoreInfo orderStoreInfos,
         List<OrderItemDetail> orderItemDetails
     ) {
-        return new WaitingForRiderOrderDto(orderStoreInfos, orderItemDetails);
+        return new WaitingForRiderOrderServiceResponseDto(orderStoreInfos, orderItemDetails);
     }
 }
