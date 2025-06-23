@@ -3,7 +3,7 @@ package ksh.deliverymate.order.repository;
 import ksh.deliverymate.order.entity.Order;
 import ksh.deliverymate.order.entity.OrderStatus;
 import ksh.deliverymate.order.repository.projection.OrderStoreInfo;
-import ksh.deliverymate.order.vo.Positoion;
+import ksh.deliverymate.order.vo.Position;
 import ksh.deliverymate.store.entity.FoodCategory;
 import ksh.deliverymate.store.entity.Store;
 import ksh.deliverymate.store.entity.StoreStatus;
@@ -80,7 +80,7 @@ class OrderRepositoryTest {
     @Test
     void findByStatusAndWithinRadius1() {
         //given
-        Positoion riderCoordinate = Positoion.of(37.5665, 126.978);
+        Position riderCoordinate = Position.of(37.5665, 126.978);
         int radius = 500;
         Pageable pageable = PageRequest.of(0, 2);
 
