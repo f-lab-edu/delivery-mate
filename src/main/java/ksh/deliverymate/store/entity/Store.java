@@ -2,10 +2,7 @@ package ksh.deliverymate.store.entity;
 
 import jakarta.persistence.*;
 import ksh.deliverymate.store.vo.Address;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.locationtech.jts.geom.Point;
 
 @Entity
@@ -13,6 +10,7 @@ import org.locationtech.jts.geom.Point;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of = {"address"})
 public class Store {
 
     @Id
