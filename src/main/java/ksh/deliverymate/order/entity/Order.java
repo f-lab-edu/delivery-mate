@@ -38,7 +38,7 @@ public class Order extends BaseEntity {
 
     private Long riderId;
 
-    @SQLDelete(sql = "update order set id_deleted = true where id = ?")
+    @SQLDelete(sql = "update order set is_deleted = true where id = ?")
     @Where(clause = "isDeleted = false")
     private boolean isDeleted;
 }
