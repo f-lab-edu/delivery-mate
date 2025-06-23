@@ -9,16 +9,16 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class WaitingForRiderOrderServiceResponseDto {
+public class WaitingRiderOrderDto {
 
     private OrderStoreInfo orderStoreInfo;
     private List<OrderItemDetail> orderItemDetails;
 
 
-    public static WaitingForRiderOrderServiceResponseDto of(
+    public static WaitingRiderOrderDto of(
         OrderStoreInfo orderStoreInfos,
         List<OrderItemDetail> orderItemDetails
     ) {
-        return new WaitingForRiderOrderServiceResponseDto(orderStoreInfos, orderItemDetails);
+        return new WaitingRiderOrderDto(orderStoreInfos, orderItemDetails);
     }
 }
