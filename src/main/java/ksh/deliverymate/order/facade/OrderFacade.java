@@ -50,6 +50,10 @@ public class OrderFacade {
         );
     }
 
+    public void assignRider(long id, long riderId) {
+        orderService.assignRider(id, riderId);
+    }
+
     private static List<Long> extractOrderIdsFrom(Slice<OrderWithStore> orderStoreInfos) {
         return orderStoreInfos.stream()
             .map(OrderWithStore::getOrderId)
