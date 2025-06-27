@@ -34,7 +34,7 @@ public class OrderService {
 
     @Transactional
     public void assignRider(long id, long riderId) {
-        orderRepository.findByIdAndRiderIdIsNull(id)
+        orderRepository.findByIdAndStatusAndRiderIdIsNull(id, OrderStatus.ACCEPTED)
             .orElseThrow(() -> new CustomException(ErrorCode.ORDER_ALREADY_ASSIGNED_RIDER))
             .assignRider(riderId);
     }
