@@ -1,5 +1,7 @@
 package ksh.deliverymate.order.service;
 
+import ksh.deliverymate.global.exception.CustomException;
+import ksh.deliverymate.global.exception.ErrorCode;
 import ksh.deliverymate.order.entity.OrderStatus;
 import ksh.deliverymate.order.repository.OrderRepository;
 import ksh.deliverymate.order.repository.projection.OrderWithStore;
@@ -28,5 +30,12 @@ public class OrderService {
             radius,
             pageable
         );
+    }
+
+    @Transactional
+    public void assignRider(long id, long riderId) {
+        orderRepository.findByIdAndStatusAndRiderIdIsNull(id, OrderStatus.ACCEPTED)
+            .orElseThrow(() -> new CustomException(ErrorCode.ORDER_ALREADY_ASSIGNED_RIDER))
+            .assignRider(riderId);
     }
 }

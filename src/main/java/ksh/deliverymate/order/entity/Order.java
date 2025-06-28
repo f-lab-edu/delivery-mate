@@ -41,4 +41,9 @@ public class Order extends BaseEntity {
     @SQLDelete(sql = "update order set is_deleted = true where id = ?")
     @Where(clause = "isDeleted = 0")
     private boolean isDeleted;
+
+    public void assignRider(long riderId) {
+        this.riderId = riderId;
+        this.status = OrderStatus.ASSIGNED;
+    }
 }
