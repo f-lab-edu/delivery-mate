@@ -2,7 +2,6 @@ package ksh.deliverymate.global.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 @Getter
 @AllArgsConstructor
@@ -14,13 +13,5 @@ public class ErrorResponseDto {
 
     public static ErrorResponseDto of(int status, String code, String message) {
         return new ErrorResponseDto(status, code, message);
-    }
-
-    public static ErrorResponseDto error() {
-        return new ErrorResponseDto(
-            HttpStatus.INTERNAL_SERVER_ERROR.value(),
-            HttpStatus.INTERNAL_SERVER_ERROR.name(),
-            "Internal Server Error"
-        );
     }
 }
