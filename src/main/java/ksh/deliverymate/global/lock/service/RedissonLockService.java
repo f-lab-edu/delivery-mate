@@ -3,6 +3,7 @@ package ksh.deliverymate.global.lock.service;
 import ksh.deliverymate.global.exception.CustomException;
 import ksh.deliverymate.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class RedissonLockService implements LockService {
 
     private final RedissonClient redissonClient;
@@ -31,6 +33,10 @@ public class RedissonLockService implements LockService {
             lock = acquireLock(key, waitTime, leaseTime, unit);
             return task.call();
         } catch (Exception e) {
+            if (e instanceof CustomException) {
+                throw (CustomException) e;
+            }
+
             throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR);
         } finally {
             releaseLock(lock);
