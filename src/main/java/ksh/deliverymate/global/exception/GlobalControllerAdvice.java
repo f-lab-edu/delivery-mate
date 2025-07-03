@@ -2,6 +2,7 @@ package ksh.deliverymate.global.exception;
 
 import ksh.deliverymate.global.dto.response.ErrorResponseDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.Locale;
 
 @RestControllerAdvice
 @RequiredArgsConstructor
+@Slf4j
 public class GlobalControllerAdvice {
 
     private final MessageSource messageSource;
@@ -39,12 +41,12 @@ public class GlobalControllerAdvice {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDto> handleException(Exception e, Locale locale) {
+        log.info(e.getMessage());
         ErrorResponseDto response = ErrorResponseDto.of(
             HttpStatus.INTERNAL_SERVER_ERROR.value(),
             HttpStatus.INTERNAL_SERVER_ERROR.name(),
             "Internal Server Error"
         );
-
         return ResponseEntity
             .status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body(response);

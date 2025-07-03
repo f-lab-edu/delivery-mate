@@ -1,6 +1,8 @@
 package ksh.deliverymate.order.facade;
 
 import ksh.deliverymate.global.dto.request.PageRequestDto;
+import ksh.deliverymate.global.lock.LockKey;
+import ksh.deliverymate.global.lock.service.LockService;
 import ksh.deliverymate.order.dto.request.WaitingRiderOrderRequestDto;
 import ksh.deliverymate.order.dto.response.WaitingRiderOrderDto;
 import ksh.deliverymate.order.repository.projection.OrderItemDetail;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Component
@@ -23,6 +26,7 @@ public class OrderFacade {
 
     private final OrderService orderService;
     private final OrderItemService orderItemService;
+    private final LockService lockService;
 
     public Slice<WaitingRiderOrderDto> findOrderInfosWaitingForRider(
         WaitingRiderOrderRequestDto request,
@@ -51,7 +55,16 @@ public class OrderFacade {
     }
 
     public void assignRider(long id, long riderId) {
-        orderService.assignRider(id, riderId);
+        lockService.executeWithLock(
+            LockKey.RIDER_ASSIGNMENT.makeKey(id),
+            3000,
+            3000,
+            TimeUnit.MILLISECONDS,
+            () -> {
+                orderService.assignRider(id, riderId);
+                return null;
+            }
+        );
     }
 
     private static List<Long> extractOrderIdsFrom(Slice<OrderWithStore> orderStoreInfos) {

@@ -1,9 +1,26 @@
+# ── 공통 설정 ──
 spring:
+  profiles:
+    default: develop
+
+  jpa:
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
+
+---
+
+# ── 개발 ──
+spring:
+  config:
+    activate:
+      on-profile: develop
+
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/delivery-mate?serverTimezone=Asia/Seoul
     username: root
     password: "1234"
-    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
@@ -11,8 +28,29 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.spatial.dialect.mysql.MySQLSpatialDialect
-        format_sql: true
-        default_batch_fetch_size: 1000
 
-logging.level:
-  org.hibernate.SQL: debug
+---
+
+# ── 테스트 ──
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/delivery-mate-test?serverTimezone=Asia/Seoul
+    username: root
+    password: "1234"
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.spatial.dialect.mysql.MySQLSpatialDialect
+        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG

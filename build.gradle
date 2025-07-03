@@ -17,6 +17,7 @@ ext {
     querydslVersion = '5.1.0'
     hibernateVersion = '6.6.18.Final'
     jtsVersion = '1.19.0'
+    redissonVersion = '3.46.0'
 }
 
 configurations {
@@ -60,6 +61,9 @@ dependencies {
     //Spatial
     implementation "org.hibernate.orm:hibernate-spatial:${hibernateVersion}"
     implementation "org.locationtech.jts:jts-core:${jtsVersion}"
+
+    //Redis
+    implementation "org.redisson:redisson-spring-boot-starter:${redissonVersion}"
 }
 
 tasks.named('test') {
